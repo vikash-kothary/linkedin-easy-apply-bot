@@ -17,13 +17,13 @@ salary: 60,000
 rate: 25
 # --------- Optional Parameters -------
 uploads:
-  Resume: /Users/steven/Desktop/LinkedIn-Easy-Apply-Bot/cv.pdf
-  Cover Letter: /Users/steven/Desktop/LinkedIn-Easy-Apply-Bot/cl.pdf
+  Resume: ./files/cv.pdf
+  Cover Letter: ./files/cl.pdf
   #Photo: # PATH TO photo
 
 
 output_filename:
-- /Users/steven/Desktop/LinkedIn-Easy-Apply-Bot/out.csv
+- ./files/data/out.csv
 
 # blacklist:
 # - # Company names you want to ignore
