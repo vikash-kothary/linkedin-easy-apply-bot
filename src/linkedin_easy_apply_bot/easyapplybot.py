@@ -13,7 +13,6 @@ from pathlib import Path
 
 import pandas as pd
 import pyautogui
-import yaml
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
@@ -27,10 +26,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.chrome.service import Service as ChromeService
 import webdriver_manager.chrome as ChromeDriverManager
 
+from linkedin_easy_apply_bot.backend.utils import yaml_utils
+
 ChromeDriverManager = ChromeDriverManager.ChromeDriverManager
 
 
 log = logging.getLogger(__name__)
+logging.basicConfig(level=logging.DEBUG)
 
 
 def setupLogger() -> None:
@@ -65,10 +67,10 @@ class EasyApplyBot:
         self,
         username,
         password,
-        phone_number,
+        phone_number=None,
         # profile_path,
-        salary,
-        rate,
+        salary=None,
+        rate=None,
         uploads={},
         filename="output.csv",
         blacklist=[],
@@ -179,7 +181,7 @@ class EasyApplyBot:
             )
             df = df[df["timestamp"] > (datetime.now() - timedelta(days=2))]
             jobIDs: list = list(df.jobID)
-            log.info(f"{len(jobIDs)} jobIDs found")
+            log.info(f"{len(jobIDs)} applied jobIDs found")
             return jobIDs
         except Exception as e:
             log.info(
@@ -762,11 +764,7 @@ class EasyApplyBot:
 
 if __name__ == "__main__":
     # Load yaml config
-    with open("src/config.yaml", "r") as stream:
-        try:
-            parameters = yaml.safe_load(stream)
-        except yaml.YAMLError as exc:
-            raise exc
+    parameters = yaml_utils.read_file('src/config.yaml')
     # Validate input
     assert len(parameters["positions"]) > 0
     assert len(parameters["locations"]) > 0
@@ -825,4 +823,4 @@ if __name__ == "__main__":
     )
 
     # Start easy applying to jobs
-    # bot.start_apply(positions, locations)
+    bot.start_apply(positions, locations)
