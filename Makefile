@@ -4,13 +4,10 @@ ENV ?= local
 export
 
 lint:
-	@.venv/bin/black src/
+	@poetry run black src/
 
 run:
-	@.venv/bin/python3 src/easyapplybot.py
+	@poetry run streamlit run src/linkedin_easy_apply_bot/frontend/login.py
 
 init:
-	@python3 -m venv .venv
-	@.venv/bin/pip3 install black pandas
-	@.venv/bin/pip3 install -r src/requirements.txt
-	@.venv/bin/pip3 install ./webdriver_manager
+	@poetry install

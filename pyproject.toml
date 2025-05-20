@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "linkedin-easy-apply-bot"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.11.10"
+selenium = "^4.32.0"
+beautifulsoup4 = "^4.13.4"
+streamlit = "^1.45.1"
+pyyaml = "^6.0.2"
+lxml = "^5.4.0"
+pkginfo = "^1.12.1.2"
+pyautogui = "^0.9.54"
+webdriver-manager = "^4.0.2"
+streamlit-extras = "^0.7.1"
+
+[tool.poetry.group.lint.dependencies]
+black = "^25.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
