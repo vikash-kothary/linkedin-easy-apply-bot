@@ -11,3 +11,6 @@ run:
 
 init:
 	@poetry install
+
+%:
+	@if [[ -f "scripts/${@}.sh" ]]; then bash scripts/${@}.sh; fi
