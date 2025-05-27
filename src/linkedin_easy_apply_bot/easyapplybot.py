@@ -331,8 +331,8 @@ class EasyApplyBot:
                                     continue
                                 else:
                                     jobIDs[jobID] = "To be processed"
-                    if len(jobIDs) > 0:
-                        self.apply_loop(jobIDs)
+                    # if len(jobIDs) > 0:
+                    #     self.apply_loop(jobIDs)
                     self.browser, jobs_per_page = self.next_jobs_page(
                         position,
                         location,
