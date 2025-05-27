@@ -15,7 +15,6 @@ lxml = "^5.4.0"
 pkginfo = "^1.12.1.2"
 pyautogui = "^0.9.54"
 webdriver-manager = "^4.0.2"
-streamlit-extras = "^0.7.1"
 
 [tool.poetry.group.lint.dependencies]
 black = "^25.1.0"
