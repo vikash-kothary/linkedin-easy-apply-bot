@@ -1,5 +1,4 @@
 import streamlit as st
-from streamlit_extras.switch_page_button import switch_page
 
 from linkedin_easy_apply_bot import easyapplybot
 from linkedin_easy_apply_bot.backend import config
@@ -22,11 +21,13 @@ def on_login():
     #     username=st.session_state['username'],
     #     password=st.session_state['password']
     # )
-    switch_page('/profile')
+    print('TODO: Login')
 
 on_startup()
 
 with st.form(key="my_form"):
     st.session_state['username'] = st.text_input("Email", value=config.LINKEDIN_USERNAME)
     st.session_state['password'] = st.text_input("Password", type='password', value=config.LINKEDIN_PASSWORD)
-    st.form_submit_button("Login", on_click=on_login)
+    if st.form_submit_button("Login", on_click=on_login):
+        st.switch_page('pages/profile.py')
+        
