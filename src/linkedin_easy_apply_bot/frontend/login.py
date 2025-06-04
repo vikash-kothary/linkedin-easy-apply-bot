@@ -1,8 +1,12 @@
 import streamlit as st
+import logging
 
 from linkedin_easy_apply_bot import easyapplybot
 from linkedin_easy_apply_bot.backend import config
 from linkedin_easy_apply_bot.backend.utils import yaml_utils
+
+# Suppress selenium debug logs
+logging.getLogger('selenium').setLevel(logging.INFO)
 
 st.set_page_config(
     page_title='LinkedIn Easy Apply Bot',
@@ -17,10 +21,10 @@ def on_startup():
     
 @st.cache_resource
 def on_login():
-    # easyapplybot.EasyApplyBot(
-    #     username=st.session_state['username'],
-    #     password=st.session_state['password']
-    # )
+    easyapplybot.EasyApplyBot(
+        username=st.session_state['username'],
+        password=st.session_state['password']
+    )
     print('TODO: Login')
 
 on_startup()
