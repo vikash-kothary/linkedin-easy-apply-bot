@@ -811,15 +811,7 @@ if __name__ == "__main__":
     # Create easy apply bot
     bot = EasyApplyBot(
         parameters["username"],
-        parameters["password"],
-        parameters["phone_number"],
-        parameters["salary"],
-        parameters["rate"],
-        uploads=uploads,
-        filename=output_filename,
-        blacklist=blacklist,
-        blackListTitles=blackListTitles,
-        experience_level=parameters.get("experience_level", []),
+        parameters["password"]
     )
 
     # Start easy applying to jobs

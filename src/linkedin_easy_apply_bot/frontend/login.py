@@ -1,6 +1,6 @@
 import streamlit as st
 
-from linkedin_easy_apply_bot.backend import easyapplybot
+from linkedin_easy_apply_bot.backend import main
 from linkedin_easy_apply_bot.backend import config
 from linkedin_easy_apply_bot.backend.utils import yaml_utils
 
@@ -17,7 +17,7 @@ def on_startup():
     
 @st.cache_resource
 def on_login():
-    easyapplybot.EasyApplyBot(
+    main.EasyApplyBot(
         username=st.session_state['username'],
         password=st.session_state['password']
     )
