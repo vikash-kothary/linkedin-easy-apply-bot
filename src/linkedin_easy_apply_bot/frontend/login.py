@@ -1,6 +1,6 @@
 import streamlit as st
 
-from linkedin_easy_apply_bot import easyapplybot
+from linkedin_easy_apply_bot.backend import easyapplybot
 from linkedin_easy_apply_bot.backend import config
 from linkedin_easy_apply_bot.backend.utils import yaml_utils
 
