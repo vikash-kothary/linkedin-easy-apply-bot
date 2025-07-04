@@ -23,10 +23,11 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
+
 from selenium.webdriver.chrome.service import Service as ChromeService
 import webdriver_manager.chrome as ChromeDriverManager
 
-from linkedin_easy_apply_bot.backend.utils import yaml_utils
+from linkedin_easy_apply_bot.backend.utils import yaml_utils, selenium_utils
 
 ChromeDriverManager = ChromeDriverManager.ChromeDriverManager
 
@@ -108,9 +109,8 @@ class EasyApplyBot:
         self.options = self.browser_options()
         chrome_driver_path = os.getenv('CHROME_DRIVER_PATH')
         # ChromeDriverManager().install()
-        self.browser = webdriver.Chrome(
-            service=ChromeService(chrome_driver_path), options=self.options
-        )
+        self.browser = selenium_utils.get_driver()
+        selenium_utils.get_cookies()
         self.wait = WebDriverWait(self.browser, 30)
         self.blacklist = blacklist
         self.blackListTitles = blackListTitles
@@ -235,6 +235,7 @@ class EasyApplyBot:
             #         time.sleep(15)
             # else:
             #     time.sleep()
+            selenium_utils.save_cookies()
         except TimeoutException:
             log.info(
                 "TimeoutException! Username/password field or login button not found"
