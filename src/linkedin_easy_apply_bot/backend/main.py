@@ -72,7 +72,7 @@ class EasyApplyBot:
         salary=None,
         rate=None,
         uploads={},
-        filename="output.csv",
+        filename=Path("files/data/output.csv"),
         blacklist=[],
         blackListTitles=[],
         experience_level=[],
@@ -150,6 +150,9 @@ class EasyApplyBot:
                 By.XPATH,
                 '//button[contains(@class, "jobs-apply-button")]',
             ),
+            "salary_button": (
+                By.XPATH, '//button[contains(@class, "artdeco-button--muted")]//span/strong',
+            )
         }
 
         # initialize questions and answers file
@@ -431,10 +434,27 @@ class EasyApplyBot:
         self.job_page = self.load_page(sleep=0.5)
         return self.job_page
 
+    def get_salary(self):
+        salary = None
+
+        # Locate all salary-related buttons (those with muted style)
+        buttons = self.get_elements("salary_button")
+
+        # Loop through and find the one containing the salary text
+        for btn in buttons:
+            if "£" in btn.text:
+                print("Salary range found:", btn.text)
+                salary = btn.text
+                break
+
+        return salary
+
+
     def get_easy_apply_button(self):
         EasyApplyButton = False
         try:
             buttons = self.get_elements("easy_apply_button")
+        
             # buttons = self.browser.find_elements("xpath",
             #     '//button[contains(@class, "jobs-apply-button")]'
             # )
@@ -756,6 +776,7 @@ class EasyApplyBot:
         # self.avoid_lock()
         log.info("Loading next job page?")
         self.load_page()
+        log.info(self.browser.current_url)
         return (self.browser, jobs_per_page)
 
     # def finish_apply(self) -> None:
