@@ -2,6 +2,7 @@
 
 /config/*
 !/config/.env.example
+/instances/
 
 # Created by https://www.toptal.com/developers/gitignore/api/windows,macos,linux,python,jupyternotebooks,pycharm+all,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,macos,linux,python,jupyternotebooks,pycharm+all,visualstudiocode
