@@ -28,40 +28,17 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.chrome.service import Service as ChromeService
 import webdriver_manager.chrome as ChromeDriverManager
 
-from linkedin_easy_apply_bot.backend.utils import yaml_utils, selenium_utils
+from linkedin_easy_apply_bot.backend.utils import logging_utils
+from linkedin_easy_apply_bot.backend.utils import selenium_utils
+from linkedin_easy_apply_bot.backend.utils import yaml_utils
+
 
 ChromeDriverManager = ChromeDriverManager.ChromeDriverManager
 
-
-log = logging.getLogger(__name__)
-logging.basicConfig(level=logging.DEBUG)
-
-
-def setupLogger() -> None:
-    dt: str = datetime.strftime(datetime.now(), "%m_%d_%y %H_%M_%S ")
-
-    if not os.path.isdir("./logs"):
-        os.mkdir("./logs")
-
-    # TODO need to check if there is a log dir available or not
-    logging.basicConfig(
-        filename=("./logs/" + str(dt) + "applyJobs.log"),
-        filemode="w",
-        format="%(asctime)s::%(name)s::%(levelname)s::%(message)s",
-        datefmt="./logs/%d-%b-%y %H:%M:%S",
-    )
-    log.setLevel(logging.DEBUG)
-    c_handler = logging.StreamHandler()
-    c_handler.setLevel(logging.DEBUG)
-    c_format = logging.Formatter(
-        "%(asctime)s - %(levelname)s - %(message)s", "%H:%M:%S"
-    )
-    c_handler.setFormatter(c_format)
-    log.addHandler(c_handler)
+log = logging_utils.get_logger(__name__)
 
 
 class EasyApplyBot:
-    setupLogger()
     # MAX_SEARCH_TIME is 10 hours by default, feel free to modify it
     MAX_SEARCH_TIME = 60 * 60
 
