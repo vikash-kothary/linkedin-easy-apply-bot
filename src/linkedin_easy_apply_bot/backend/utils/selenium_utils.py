@@ -48,28 +48,31 @@ def save_cookies():
 
     try:
         with open("instances/cookies.json", "w") as f:
-            json.dump(driver.get_cookies(), f, indent=2)
+            json.dump(driver.get_cookies(), f, indent=1)
     except:
         pass
 
-    driver.quit()
 
-
-def get_cookies():
+def load_cookies():
     driver = get_driver()
     # Load cookies from file
 
     try:
         with open("instances/cookies.json", "r") as f:
+            print("opened file, loading json..")
             cookies = json.load(f)
+            print("loaded json, getting cookie...")
             for cookie in cookies:
-                driver.add_cookie(cookie)
-    except:
+                try:
+                    driver.add_cookie(cookie)
+                    print(f"Cookie added: {cookie['name']} = {cookie['value']}")
+                except Exception as e:
+                    print(f"Error adding cookie: {e}")
+    except Exception as e:
+        print(f"Error loading cookies: {e}")
         pass
 
     driver.refresh()  # Apply cookies
-
-    import json
 
 
 def start_new_browser():

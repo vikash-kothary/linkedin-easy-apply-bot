@@ -110,11 +110,14 @@ class EasyApplyBot:
         chrome_driver_path = os.getenv("CHROME_DRIVER_PATH")
         # ChromeDriverManager().install()
         self.browser = selenium_utils.get_driver()
-        selenium_utils.get_cookies()
+        print("trying to load cookies")
+        self.browser.get("https://www.linkedin.com")
+        selenium_utils.load_cookies()
         self.wait = WebDriverWait(self.browser, 30)
         self.blacklist = blacklist
         self.blackListTitles = blackListTitles
-        self.start_linkedin(username, password)
+        
+        # self.start_linkedin(username, password)
         self.phone_number = phone_number
         self.experience_level = experience_level
 
