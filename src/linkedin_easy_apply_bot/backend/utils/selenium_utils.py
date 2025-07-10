@@ -12,14 +12,14 @@ driver = None
 def get_driver():
     global driver
 
-    if driver is None:    
+    if driver is None:
         options = browser_options()
-        chrome_driver_path = os.getenv('CHROME_DRIVER_PATH')
+        chrome_driver_path = os.getenv("CHROME_DRIVER_PATH")
         # ChromeDriverManager().install()
         driver = webdriver.Chrome(
             service=ChromeService(chrome_driver_path), options=options
         )
-    
+
     return driver
 
 
@@ -38,7 +38,7 @@ def browser_options():
 
     # Load user profile
     # options.add_argument(r"--user-data-dir={}".format(self.profile_path))
-    
+
     return options
 
 
@@ -69,7 +69,6 @@ def get_cookies():
 
     driver.refresh()  # Apply cookies
 
-
     import json
 
 
@@ -80,10 +79,7 @@ def start_new_browser():
 
     # Save session info
     with open("session.json", "w") as f:
-        json.dump({
-            "session_url": session_url,
-            "session_id": session_id
-        }, f, indent=2)
+        json.dump({"session_url": session_url, "session_id": session_id}, f, indent=2)
 
     print(f"Session saved: {session_url} | {session_id}")
     return driver
@@ -102,15 +98,12 @@ def attach_to_existing_browser():
     temp_driver.quit()
 
     # Attach to the original session
-    driver = RemoteWebDriver(
-        command_executor=session_url,
-        desired_capabilities={}
-    )
+    driver = RemoteWebDriver(command_executor=session_url, desired_capabilities={})
     driver.session_id = session_id
 
     print(f"Attached to session: {session_url} | {session_id}")
     return driver
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     start_new_browser()

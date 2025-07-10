@@ -107,7 +107,7 @@ class EasyApplyBot:
         self.appliedJobIDs: list = past_ids if past_ids != None else []
         self.filename: str = filename
         self.options = self.browser_options()
-        chrome_driver_path = os.getenv('CHROME_DRIVER_PATH')
+        chrome_driver_path = os.getenv("CHROME_DRIVER_PATH")
         # ChromeDriverManager().install()
         self.browser = selenium_utils.get_driver()
         selenium_utils.get_cookies()
@@ -151,8 +151,9 @@ class EasyApplyBot:
                 '//button[contains(@class, "jobs-apply-button")]',
             ),
             "salary_button": (
-                By.XPATH, '//button[contains(@class, "artdeco-button--muted")]//span/strong',
-            )
+                By.XPATH,
+                '//button[contains(@class, "artdeco-button--muted")]//span/strong',
+            ),
         }
 
         # initialize questions and answers file
@@ -450,12 +451,11 @@ class EasyApplyBot:
 
         return salary
 
-
     def get_easy_apply_button(self):
         EasyApplyButton = False
         try:
             buttons = self.get_elements("easy_apply_button")
-        
+
             # buttons = self.browser.find_elements("xpath",
             #     '//button[contains(@class, "jobs-apply-button")]'
             # )
@@ -786,13 +786,13 @@ class EasyApplyBot:
 
 if __name__ == "__main__":
     # Load yaml config
-    parameters = yaml_utils.read_file('src/config.yaml')
+    parameters = yaml_utils.read_file("src/config.yaml")
     # Validate input
     assert len(parameters["positions"]) > 0
     assert len(parameters["locations"]) > 0
 
-    parameters['username'] = os.getenv('LINKEDIN_USERNAME')
-    parameters['password'] = os.getenv('LINKEDIN_PASSWORD')
+    parameters["username"] = os.getenv("LINKEDIN_USERNAME")
+    parameters["password"] = os.getenv("LINKEDIN_PASSWORD")
     assert parameters["username"] is not None
     assert parameters["password"] is not None
     assert parameters["phone_number"] is not None
@@ -831,10 +831,7 @@ if __name__ == "__main__":
     positions: list = [p for p in parameters["positions"] if p is not None]
 
     # Create easy apply bot
-    bot = EasyApplyBot(
-        parameters["username"],
-        parameters["password"]
-    )
+    bot = EasyApplyBot(parameters["username"], parameters["password"])
 
     # Start easy applying to jobs
     bot.start_apply(positions, locations)
