@@ -115,11 +115,11 @@ class EasyApplyBot:
         self.wait = WebDriverWait(self.browser, 30)
         self.blacklist = blacklist
         self.blackListTitles = blackListTitles
-        
+
         if selenium_utils.has_cookies():
             selenium_utils.load_cookies()
 
-        else: 
+        else:
             self.login(username, password)
             selenium_utils.save_cookies()
 
