@@ -107,6 +107,10 @@ def attach_to_existing_browser():
     print(f"Attached to session: {session_url} | {session_id}")
     return driver
 
+def has_cookies():
+    # Check if cookies file exists
+    return os.path.exists("instances/cookies.json") and os.path.getsize("instances/cookies.json") > 0
+
 
 if __name__ == "__main__":
     start_new_browser()

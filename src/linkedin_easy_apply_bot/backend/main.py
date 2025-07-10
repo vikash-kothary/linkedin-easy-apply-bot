@@ -15,6 +15,7 @@ import pandas as pd
 import pyautogui
 from bs4 import BeautifulSoup
 from selenium import webdriver
+import selenium
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -110,14 +111,18 @@ class EasyApplyBot:
         chrome_driver_path = os.getenv("CHROME_DRIVER_PATH")
         # ChromeDriverManager().install()
         self.browser = selenium_utils.get_driver()
-        print("trying to load cookies")
         self.browser.get("https://www.linkedin.com")
-        selenium_utils.load_cookies()
         self.wait = WebDriverWait(self.browser, 30)
         self.blacklist = blacklist
         self.blackListTitles = blackListTitles
         
-        # self.start_linkedin(username, password)
+        if selenium_utils.has_cookies():
+            selenium_utils.load_cookies()
+
+        else: 
+            self.login(username, password)
+            selenium_utils.save_cookies()
+
         self.phone_number = phone_number
         self.experience_level = experience_level
 
@@ -213,7 +218,7 @@ class EasyApplyBot:
         # options.add_argument(r"--user-data-dir={}".format(self.profile_path))
         return options
 
-    def start_linkedin(self, username, password) -> None:
+    def login(self, username, password) -> None:
         log.info("Logging in.....Please wait :)  ")
         self.browser.get(
             "https://www.linkedin.com/login?trk=guest_homepage-basic_nav-header-signin"
@@ -239,7 +244,6 @@ class EasyApplyBot:
             #         time.sleep(15)
             # else:
             #     time.sleep()
-            selenium_utils.save_cookies()
         except TimeoutException:
             log.info(
                 "TimeoutException! Username/password field or login button not found"
