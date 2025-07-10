@@ -1,24 +1,25 @@
 import os
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service as ChromeService
 import pickle
 import json
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.remote.webdriver import WebDriver as RemoteWebDriver
+
 
 driver = None
 
-def get_driver():
 
+def get_driver():
     global driver
 
-    if driver is None:
-        
+    if driver is None:    
         options = browser_options()
         chrome_driver_path = os.getenv('CHROME_DRIVER_PATH')
         # ChromeDriverManager().install()
         driver = webdriver.Chrome(
             service=ChromeService(chrome_driver_path), options=options
         )
-
+    
     return driver
 
 
@@ -40,6 +41,7 @@ def browser_options():
     
     return options
 
+
 def save_cookies():
     driver = get_driver()
     # Save cookies to file
@@ -51,6 +53,7 @@ def save_cookies():
         pass
 
     driver.quit()
+
 
 def get_cookies():
     driver = get_driver()
@@ -68,7 +71,7 @@ def get_cookies():
 
 
     import json
-from selenium import webdriver
+
 
 def start_new_browser():
     driver = get_driver()
@@ -85,8 +88,6 @@ def start_new_browser():
     print(f"Session saved: {session_url} | {session_id}")
     return driver
 
-from selenium.webdriver.remote.webdriver import WebDriver as RemoteWebDriver
-import json
 
 def attach_to_existing_browser():
     global driver
