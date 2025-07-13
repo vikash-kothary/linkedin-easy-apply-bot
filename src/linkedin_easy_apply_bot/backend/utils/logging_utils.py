@@ -1,6 +1,5 @@
 import os
 import logging
-from datetime import datetime, timedelta
 
 from linkedin_easy_apply_bot.backend import config
 from linkedin_easy_apply_bot.backend.utils import datetime_utils
