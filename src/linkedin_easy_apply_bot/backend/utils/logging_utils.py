@@ -10,7 +10,7 @@ logging.getLogger("selenium").setLevel(logging.INFO)
 
 
 def get_logger(name: str) -> logging.Logger:
-    logs_dir = 'instances/logs'
+    logs_dir = "instances/logs"
     if not os.path.isdir(logs_dir):
         os.mkdir(logs_dir)
 
@@ -35,7 +35,7 @@ def get_logger(name: str) -> logging.Logger:
     log_stream.setFormatter(log_format)
 
     # Logger
-    logger = logging.getLogger(name) 
+    logger = logging.getLogger(name)
     logger.setLevel(logging.DEBUG)
     logger.addHandler(log_stream)
     return logger

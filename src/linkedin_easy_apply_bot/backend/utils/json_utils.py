@@ -35,3 +35,19 @@ def json_to_csv(file_path, data):
 
     df = pd.DataFrame(data)
     df.to_csv(file_path, index=False, encoding="utf-8")
+
+
+def json_to_dataframe(file_path):
+    """
+    Read a JSON file and convert it to a pandas DataFrame.
+
+    :param file_path: Path to the JSON file.
+    :return: DataFrame containing the JSON data.
+    """
+    import pandas as pd
+
+    data = read_json_from_file(file_path)
+    if data is None:
+        raise ValueError("The JSON file is empty or not in the correct format.")
+    else:
+        return pd.DataFrame(data)
