@@ -1,0 +1,19 @@
+{
+    "4257252441": {
+        "is_processed": true,
+        "timestamp": "2025-07-01T11:42:42.540893",
+        "can_easy_apply": true,
+        "job": "Software Engineer",
+        "company": "Uniting Cloud",
+        "salary": null
+    },
+    "4242739604": {
+        "is_processed": true,
+        "timestamp": "2025-07-01T11:43:09.734127",
+        "can_easy_apply": true,
+        "job": "Junior Developer",
+        "company": "Corecom Consulting",
+        "salary": null
+    }
+}
+
